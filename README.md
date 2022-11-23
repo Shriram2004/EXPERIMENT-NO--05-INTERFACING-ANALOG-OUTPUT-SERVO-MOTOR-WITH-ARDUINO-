@@ -1,6 +1,6 @@
 # EXPERIMENT NO 05 INTERFACING ANALOG OUTPUT SERVO MOTOR WITH ARDUINO
 
-### AIM
+## AIM
 To interface an Analog output (servo motor) and modify the angular displacement of the servo using PWM signal .
 COMPONENTS REQUIRED:
 1.	Servo motor of choice (9v is preferred )
@@ -11,7 +11,7 @@ COMPONENTS REQUIRED:
 6.	Servo rated power supply (dc source )
 
 
-### THEORY
+## THEORY
 Servo motors and are constructed out of basic DC motors, by adding:
 •	 gear reduction
 •	 a position sensor for the motor shaft
@@ -20,41 +20,45 @@ Typically, a potentiometer (variable resistor) measures the position of the outp
 Servo motors are used for angular positioning, such as in radio control airplanes.  They typically have a movement range of 180 deg but can go up to 210 deg.The output shaft of a servo does not rotate freely, but rather is made to seek a particular angular position under electronic control. 
 
 
-![image](https://user-images.githubusercontent.com/36288975/163544439-1f477927-fcd4-42f0-9ce4-c863fdbf1210.png)
 
 
 
-#### Figure-01 SERVO MOTOR SPLIT VIEW 
+
+### Figure-01 SERVO MOTOR SPLIT VIEW 
 Control 
 An external controller (such as the Arduino) tells the servo where to go with a signal know as pulse proportional modulation (PPM) or pulse code modulation (which is often confused with pulse width modulation, PWM). PWM uses 1 to 2ms out of a 20ms time period to encode its information.
+ ![image](https://user-images.githubusercontent.com/36288975/163544439-1f477927-fcd4-42f0-9ce4-c863fdbf1210.png)
  
  
- ![image](https://user-images.githubusercontent.com/36288975/163544482-3027136f-7135-4f3d-a23f-8dc2fe04194d.png)
 
 ### Figure-02 SERVO MOTOR PINS
 
- ![image](https://user-images.githubusercontent.com/36288975/163544513-ca497421-e6ba-4f91-871f-5cfba77f22a8.png)
+![image](https://user-images.githubusercontent.com/36288975/163544482-3027136f-7135-4f3d-a23f-8dc2fe04194d.png)
+
+
 
 
 ### Figure-03 SERVO MOTOR OVERVIEW 
 
  
 
-
+ ![image](https://user-images.githubusercontent.com/36288975/163544513-ca497421-e6ba-4f91-871f-5cfba77f22a8.png)
  
 
 
 
 
+
+
+### FIGURE 04 CIRCUIT DIAGRAM
 
 CIRCUIT DIAGRAM
  
  
  ![image](https://user-images.githubusercontent.com/36288975/163544618-6eb8a7b5-7f1a-428a-8d9f-fd899b145efb.png)
 
-### FIGURE 04 CIRCUIT DIAGRAM
 
-### PROCEDURE:
+## PROCEDURE:
 1.	Connect the circuit as per the circuit diagram 
 2.	Connect the board to your computer via the USB cable.
 3.	If needed, install the drivers.
@@ -66,9 +70,38 @@ CIRCUIT DIAGRAM
 9.	Ensure safety before powering up the device.
 
 
-### PROGRAM :
- 
+## PROGRAM :
+~~~
+#include<Servo.h>
 
+Servo myservo;
+int value;
+double angle;
+
+void setup()
+{
+  Serial.begin(9600);
+  myservo.attach(9);
+}
+void loop ()
+{
+  value = analogRead(A0);
+  angle = map(value, 0, 1023, 0,180);
+  Serial.println(angle);
+  myservo.write(angle);
+  delay(15);
+}
+  
+~~~
+
+## Output
+
+### Before Simulation
+![](robex05.3.png)
+### After Simulation
+![](robex05.1.png)
+### Serial Monitor and Graph
+![](robex05.2.png)
 
 
 
